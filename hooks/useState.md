@@ -89,6 +89,19 @@ interface Item {
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [items, setItems] = useState<Item[]>([]);
+  const [listCompletedStatus, setListCompletedStatus] = useState(false)
+
+  useEffect(() => {
+    handleCompletedStatus()
+  }, [items])
+
+  const handleCompletedStatus = () => {
+    if(items.length === 0){
+      setListCompletedStatus(true)
+    }else{
+      setListCompletedStatus(false)
+    }
+  }
 
   const handleInput = (value: string) => {
     setInputValue(value);
@@ -129,6 +142,7 @@ function App() {
 
   return (
     <div className="App">
+      {listCompletedStatus ? <h1>LIST COMPLETED</h1> : null}
       <h1>Buying List</h1>
       <input
         type="text"
