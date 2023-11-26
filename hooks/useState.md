@@ -1,0 +1,27 @@
+### Basic useState()
+
+```
+function App() {
+  
+const[count, setCount] = useState(0)
+
+const incrementCount = () => {
+  count < 10 ? setCount(count+1) : null
+}
+
+const decrementCount = () => {
+  count > 0 ? setCount(count-1) : null
+}
+
+  return (
+    <div className="App">
+      <h4>Current Count is ...</h4>
+      <h1>{count}</h1>
+      <button onClick={incrementCount}>+</button>
+      <button onClick={decrementCount}>-</button>
+    </div>
+  )
+}
+
+export default App
+```
