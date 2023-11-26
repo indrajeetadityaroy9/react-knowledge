@@ -2,16 +2,15 @@
 
 ```
 function App() {
-  
-const[count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
-const incrementCount = () => {
-  count < 10 ? setCount(count+1) : null
-}
+  const incrementCount = () => {
+    count < 10 ? setCount(count + 1) : null;
+  };
 
-const decrementCount = () => {
-  count > 0 ? setCount(count-1) : null
-}
+  const decrementCount = () => {
+    count > 0 ? setCount(count - 1) : null;
+  };
 
   return (
     <div className="App">
@@ -20,8 +19,32 @@ const decrementCount = () => {
       <button onClick={incrementCount}>+</button>
       <button onClick={decrementCount}>-</button>
     </div>
-  )
+  );
 }
 
 export default App
+```
+
+```
+function LoggedIn() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const handleLogin = () => {
+        setIsLoggedIn(true);
+    };
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+    };
+
+    return (
+        <div>
+            <button onClick={handleLogin}>Login</button>
+            <button onClick={handleLogout}>Logout</button>
+            <div>User is {isLoggedIn ? `Logged In` : `Logged Out`}</div>
+        </div>
+    );
+}
+
+export default LoggedIn;
 ```
