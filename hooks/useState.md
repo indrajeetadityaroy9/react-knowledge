@@ -78,3 +78,77 @@ function User({ name, email }: Props) {
 
 export default User;
 ```
+
+```
+interface Item {
+  quantity: number;
+  name: string;
+  completed: boolean;
+}
+
+function App() {
+  const [inputValue, setInputValue] = useState("");
+  const [items, setItems] = useState<Item[]>([]);
+
+  const handleInput = (value: string) => {
+    setInputValue(value);
+  };
+
+  const handleAddingItem = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      const itemIndex = items.findIndex(item => item.name === inputValue);
+      
+      if (itemIndex !== -1) {
+        // Update quantity if item already exists
+        const newItems = [...items];
+        newItems[itemIndex].quantity += 1;
+        setItems(newItems);
+      } else {
+        // Add new item if it doesn't exist
+        const item = { quantity: 1, name: inputValue, completed: false }
+        setItems([...items, item]);
+      }
+
+      setInputValue("");
+    }
+  };
+
+  const handleDeleteItem = (itemName: string) => {
+    setItems(items.filter(item => item.name !== itemName));
+  };
+
+  const handleCheckItem = (itemName: string) => {
+    const newItems = items.map((item) => {
+      if (item.name === itemName) {
+        return { ...item, completed: !item.completed };
+      }
+      return item;
+    });
+    setItems(newItems);
+  };
+
+  return (
+    <div className="App">
+      <h1>Buying List</h1>
+      <input
+        type="text"
+        placeholder="Add an item"
+        value={inputValue}
+        onChange={(e) => handleInput(e.target.value)}
+        onKeyDown={handleAddingItem}
+      />
+      <ul>
+        {items.map((item) => (
+          <li>
+            {item.name} - Quantity: {item.quantity} - Completed: {String(item.completed)}
+            <input type="checkbox" onChange={() => handleCheckItem(item.name)}/>
+            <button onClick={() => handleDeleteItem(item.name)}>X</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App
+```
