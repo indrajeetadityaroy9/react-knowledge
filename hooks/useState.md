@@ -48,3 +48,33 @@ function LoggedIn() {
 
 export default LoggedIn;
 ```
+
+```
+type Props = {
+    name: string,
+    email: string
+}
+
+function User({ name, email }: Props) {
+    const [user, setUser] = useState<Props>({} as Props);
+
+    function handleLogin() {
+        setUser({ name, email });
+    }
+
+    function handleLogout() {
+        setUser({} as Props);
+    }
+
+    return (
+        <div>
+            <button onClick={handleLogin}>Login</button>
+            <button onClick={handleLogout}>Logout</button>
+            <div>User name: {user.name}</div>
+            <div>User email: {user.email}</div>
+        </div>
+    );
+}
+
+export default User;
+```
